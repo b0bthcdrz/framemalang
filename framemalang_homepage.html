@@ -1,0 +1,199 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap');
+:root {
+  --fm-bg:#faf7f2; --fm-surf:#eee8de; --fm-ink:#1c1917; --fm-ink2:#4a4139;
+  --fm-muted:#7a6e62; --fm-rule:#d4ccc0; --fm-terra:#b83e1a;
+  --fm-gold:#8c6812; --fm-teal:#0e6b58; --fm-moss:#3a5e30; --fm-violet:#5c3ea0;
+}
+@media(prefers-color-scheme:dark){:root{
+  --fm-bg:#181410; --fm-surf:#242018; --fm-ink:#f0e8d8; --fm-ink2:#c4bbb0;
+  --fm-muted:#9a8e80; --fm-rule:#2e2820; --fm-terra:#e06040;
+  --fm-gold:#d4a430; --fm-teal:#28b098; --fm-moss:#5aaa48; --fm-violet:#9870e0;
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+.fm{font-family:'DM Sans',var(--font-sans);background:var(--fm-bg);color:var(--fm-ink)}
+
+.fm-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 14px;border-bottom:1px solid var(--fm-rule)}
+.fm-mark{font-family:'Cormorant Garamond',Georgia,serif;display:flex;align-items:baseline;gap:3px}
+.fm-mark .w{font-size:22px;font-weight:600;letter-spacing:-0.5px;color:var(--fm-ink)}
+.fm-mark .city{font-size:11px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--fm-terra)}
+.fm-links{display:flex;gap:18px}
+.fm-links a{font-size:11px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--fm-muted);text-decoration:none;cursor:pointer}
+.fm-links a:hover{color:var(--fm-terra)}
+
+.fm-hero{margin:20px;border:1px solid var(--fm-rule);display:grid;grid-template-columns:55% 45%;min-height:240px}
+.fm-hero-vis{background:var(--fm-surf);position:relative;display:flex;align-items:center;justify-content:center;min-height:200px}
+.play-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--fm-rule);display:flex;align-items:center;justify-content:center}
+.play-btn::after{content:'';display:block;width:0;height:0;border-style:solid;border-width:8px 0 8px 14px;border-color:transparent transparent transparent var(--fm-gold);margin-left:3px}
+.fm-hero-label{position:absolute;top:10px;left:10px;display:flex;gap:6px}
+.fm-hero-dur{position:absolute;bottom:10px;right:10px;font-size:10px;color:var(--fm-muted);letter-spacing:0.3px}
+.fm-hero-body{padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+.fm-hero-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.fm-hero-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:600;line-height:1.3;color:var(--fm-ink);margin-bottom:10px}
+.fm-hero-ex{font-size:12px;line-height:1.65;color:var(--fm-muted);margin-bottom:14px;font-style:italic}
+.fm-hero-by{font-size:10px;color:var(--fm-muted);letter-spacing:0.3px;border-top:1px solid var(--fm-rule);padding-top:10px}
+
+.bdg{display:inline-block;font-size:9px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;padding:3px 7px;border-radius:2px}
+.bm{background:var(--fm-gold);color:var(--fm-bg)} .ba{background:var(--fm-terra);color:var(--fm-bg)}
+.bt{background:var(--fm-teal);color:var(--fm-bg)} .bp{background:var(--fm-moss);color:var(--fm-bg)}
+.bv{background:var(--fm-violet);color:var(--fm-bg)} .bg-live{background:var(--fm-terra);color:var(--fm-bg)}
+
+.pill{display:inline-block;font-size:10px;padding:4px 10px;border:1px solid var(--fm-rule);border-radius:2px;color:var(--fm-ink2);cursor:pointer;margin:3px 3px 3px 0}
+.pill:hover{border-color:var(--fm-terra);color:var(--fm-terra)}
+
+.sec{padding:0 20px;margin:24px 0 12px;display:flex;align-items:center;gap:12px}
+.sec-line{flex:1;height:1px;background:var(--fm-rule)}
+.sec-label{font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--fm-muted);white-space:nowrap}
+
+.fm-grid{padding:0 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fm-card{border:1px solid var(--fm-rule);padding:14px;cursor:pointer}
+.fm-card:hover{border-color:var(--fm-terra)}
+.fm-ct{margin-bottom:8px}
+.fm-ch{font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;font-weight:600;line-height:1.35;color:var(--fm-ink);margin-bottom:7px}
+.fm-cex{font-size:11px;line-height:1.6;color:var(--fm-muted);margin-bottom:10px}
+.fm-cm{font-size:10px;color:var(--fm-muted);letter-spacing:0.3px;border-top:1px solid var(--fm-rule);padding-top:8px;text-transform:uppercase}
+.fm-vthumb{background:var(--fm-surf);height:80px;margin-bottom:10px;display:flex;align-items:center;justify-content:center}
+.sm-play{width:26px;height:26px;border-radius:50%;border:1px solid var(--fm-rule);display:flex;align-items:center;justify-content:center}
+.sm-play::after{content:'';width:0;height:0;border-style:solid;border-width:5px 0 5px 9px;border-color:transparent transparent transparent var(--fm-gold);margin-left:2px}
+
+.fm-tokoh{margin:0 20px 4px;border:1px solid var(--fm-rule);display:grid;grid-template-columns:88px 1fr}
+.fm-tok-av{background:var(--fm-surf);display:flex;align-items:center;justify-content:center}
+.fm-tok-bod{padding:14px}
+.fm-tok-name{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:600;color:var(--fm-ink);margin-bottom:2px}
+.fm-tok-role{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--fm-terra);margin-bottom:8px}
+.fm-tok-bio{font-size:11.5px;line-height:1.65;color:var(--fm-muted)}
+
+.fm-tags-block{padding:0 20px}
+.fm-tg-head{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--fm-muted);margin-bottom:6px;margin-top:14px}
+
+.fm-events{margin:0 20px;border:1px solid var(--fm-rule)}
+.fm-ev{display:flex;align-items:center;gap:14px;padding:11px 14px;border-bottom:1px solid var(--fm-rule)}
+.fm-ev:last-child{border-bottom:none}
+.fm-ev-d{text-align:center;min-width:28px}
+.fm-ev-dd{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:600;color:var(--fm-terra);line-height:1}
+.fm-ev-dm{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--fm-muted)}
+.fm-ev-info{flex:1}
+.fm-ev-title{font-size:12px;font-weight:500;color:var(--fm-ink);margin-bottom:2px}
+.fm-ev-sub{font-size:10px;color:var(--fm-muted)}
+
+.fm-foot{margin:32px 20px 0;padding-top:14px;border-top:1px solid var(--fm-rule);display:flex;justify-content:space-between;align-items:center;padding-bottom:4px}
+.fm-fmark{font-family:'Cormorant Garamond',Georgia,serif;font-size:15px;color:var(--fm-muted)}
+.fm-fmark span{color:var(--fm-terra)}
+.fm-fcopy{font-size:10px;color:var(--fm-muted)}
+</style>
+
+<div class="fm">
+<nav class="fm-nav">
+  <div class="fm-mark"><span class="w">frame</span><span class="city">malang</span></div>
+  <div class="fm-links">
+    <a>Artikel</a><a>MiniDok</a><a>Tokoh</a><a>Tempat</a><a>Acara</a>
+  </div>
+</nav>
+
+<div class="fm-hero">
+  <div class="fm-hero-vis">
+    <div class="fm-hero-label"><span class="bdg bm">MiniDok</span></div>
+    <div class="play-btn"></div>
+    <div class="fm-hero-dur">07:42</div>
+  </div>
+  <div class="fm-hero-body">
+    <div>
+      <div class="fm-hero-tags">
+        <span class="pill">Seni Pertunjukan</span>
+        <span class="pill">Tradisi Lisan</span>
+      </div>
+      <div class="fm-hero-h">Nada-Nada Terakhir Karawitan Klojen: Merekam Sebelum Sunyi</div>
+      <div class="fm-hero-ex">Di sebuah rumah di Gang Sari, empat pengrawit sepuh masih berlatih setiap Kamis malam. Ini mungkin generasi terakhir.</div>
+    </div>
+    <div class="fm-hero-by">Oleh <strong>Anindita R.</strong> · 14 Mar 2025</div>
+  </div>
+</div>
+
+<div class="sec"><div class="sec-line"></div><div class="sec-label">Terbaru</div><div class="sec-line"></div></div>
+
+<div class="fm-grid">
+  <div class="fm-card">
+    <div class="fm-ct"><span class="bdg ba">Artikel</span></div>
+    <div class="fm-ch">Warung Kopi Celaket: Saksi Bisu Lima Dekade Malang Berubah</div>
+    <div class="fm-cex">Dari langganan aktivis '98 hingga anak-anak startup, warung ini mencatat semua.</div>
+    <div class="fm-cm">Jurnalisme panjang · 8 min</div>
+  </div>
+  <div class="fm-card">
+    <div class="fm-ct"><span class="bdg bm">MiniDok</span></div>
+    <div class="fm-vthumb"><div class="sm-play"></div></div>
+    <div class="fm-ch">Tukang Kunci Pasar Besar: 40 Tahun Menjaga Pintu Kota</div>
+    <div class="fm-cm">Video · 5:20 · 18 Mar 2025</div>
+  </div>
+  <div class="fm-card">
+    <div class="fm-ct"><span class="bdg bt">Tokoh</span></div>
+    <div class="fm-ch">Pak Slamet Riyadi — Maestro Topeng Malangan Terakhir di Klojen</div>
+    <div class="fm-cex">50 tahun merawat topeng Malangan. Murid yang serius? Belum ada.</div>
+    <div class="fm-cm">Profil · Ekraf: Seni Rupa</div>
+  </div>
+  <div class="fm-card">
+    <div class="fm-ct"><span class="bdg bp">Tempat</span></div>
+    <div class="fm-ch">Gereja Ijen: Arsitektur Kolonial yang Masih Hidup</div>
+    <div class="fm-cex">Dibangun 1934. Masih beroperasi, dan masih menyimpan kisah yang jarang ditulis.</div>
+    <div class="fm-cm">Cagar Budaya · Klojen Tengah</div>
+  </div>
+</div>
+
+<div class="sec" style="margin-top:28px"><div class="sec-line"></div><div class="sec-label">Tokoh Bulan Ini</div><div class="sec-line"></div></div>
+
+<div class="fm-tokoh">
+  <div class="fm-tok-av">
+    <svg width="36" height="40" viewBox="0 0 36 40" fill="none" style="opacity:0.35">
+      <circle cx="18" cy="13" r="7" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M3 38c0-8.284 6.716-15 15-15s15 6.716 15 15" stroke="currentColor" stroke-width="1.2" fill="none"/>
+    </svg>
+  </div>
+  <div class="fm-tok-bod">
+    <div class="fm-tok-name">Ibu Sri Mulyani Hartati</div>
+    <div class="fm-tok-role">Pengrajin Batik Malangan · Klojen</div>
+    <div class="fm-tok-bio">35 tahun merajut motif Malangan di tangan sendiri. Workshop di Jl. Besar Ijen jadi referensi batik tulis kontemporer kota ini.</div>
+  </div>
+</div>
+
+<div class="sec" style="margin-top:28px"><div class="sec-line"></div><div class="sec-label">Jelajahi Kategori</div><div class="sec-line"></div></div>
+
+<div class="fm-tags-block">
+  <div class="fm-tg-head">OPK · Objek Pemajuan Kebudayaan</div>
+  <span class="pill">Tradisi Lisan</span><span class="pill">Manuskrip</span><span class="pill">Adat Istiadat</span><span class="pill">Ritus</span><span class="pill">Pengetahuan Tradisional</span><span class="pill">Teknologi Tradisional</span><span class="pill">Seni</span><span class="pill">Bahasa</span><span class="pill">Permainan Rakyat</span><span class="pill">Olahraga Tradisional</span><span class="pill">Cagar Budaya</span>
+  <div class="fm-tg-head">Ekraf · Subsektor Ekonomi Kreatif</div>
+  <span class="pill">Kriya</span><span class="pill">Kuliner</span><span class="pill">Fesyen</span><span class="pill">Film & Animasi</span><span class="pill">Musik</span><span class="pill">Seni Pertunjukan</span><span class="pill">Seni Rupa</span><span class="pill">Arsitektur</span><span class="pill">Desain</span><span class="pill">Fotografi</span><span class="pill">Penerbitan</span>
+</div>
+
+<div class="sec" style="margin-top:28px"><div class="sec-line"></div><div class="sec-label">Kalender Budaya</div><div class="sec-line"></div></div>
+
+<div class="fm-events">
+  <div class="fm-ev">
+    <div class="fm-ev-d"><div class="fm-ev-dd">28</div><div class="fm-ev-dm">Mar</div></div>
+    <div class="fm-ev-info">
+      <div class="fm-ev-title">Pameran Foto "Klojen Dulu dan Kini"</div>
+      <div class="fm-ev-sub">Galeri Raos · Seni Rupa</div>
+    </div>
+    <span class="bdg bg-live">Berlangsung</span>
+  </div>
+  <div class="fm-ev">
+    <div class="fm-ev-d"><div class="fm-ev-dd">05</div><div class="fm-ev-dm">Apr</div></div>
+    <div class="fm-ev-info">
+      <div class="fm-ev-title">Workshop Batik Malangan bersama Bu Sri</div>
+      <div class="fm-ev-sub">Jl. Besar Ijen 14 · Kriya</div>
+    </div>
+    <span class="bdg" style="background:var(--fm-rule);color:var(--fm-muted)">Mendatang</span>
+  </div>
+  <div class="fm-ev">
+    <div class="fm-ev-d"><div class="fm-ev-dd">12</div><div class="fm-ev-dm">Apr</div></div>
+    <div class="fm-ev-info">
+      <div class="fm-ev-title">Pertunjukan Topeng Malangan · Alun-Alun Klojen</div>
+      <div class="fm-ev-sub">Seni Pertunjukan · Gratis</div>
+    </div>
+    <span class="bdg" style="background:var(--fm-rule);color:var(--fm-muted)">Mendatang</span>
+  </div>
+</div>
+
+<div class="fm-foot">
+  <div class="fm-fmark">frame<span>malang</span>.com</div>
+  <div class="fm-fcopy">Media budaya hyperlokal · Kota Malang · 2025</div>
+</div>
+</div>
