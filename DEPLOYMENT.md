@@ -25,8 +25,9 @@
 
 ## CLI deployment (optional)
 ```bash
-pnpm dlx vercel login
-pnpm dlx vercel --prod
+npm i -g vercel
+vercel login
+vercel --prod
 ```
 
 ## Post-deploy checks
@@ -34,3 +35,7 @@ pnpm dlx vercel --prod
 - `/studio` loads Sanity Studio
 - `/sitemap.xml` and `/robots.txt` are available
 - Publishing in Sanity triggers `/api/revalidate`
+
+
+## If Vercel fails on `pnpm install`
+This repository is configured to use `npm install` and `npm run build` in `vercel.json` to avoid pnpm resolver issues seen in some environments.

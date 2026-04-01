@@ -18,6 +18,10 @@ Next.js + Sanity implementation for the Frame Malang hyperlocal media platform.
    ```bash
    pnpm install
    pnpm dev
+
+   # or npm
+   npm install
+   npm run dev
    ```
 
 ## Routes
