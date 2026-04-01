@@ -1,0 +1,10 @@
+export const qFeaturedArticles = `*[_type == "article" && status == "published" && featured == true] | order(publishedAt desc)[0...5]{..., author->, categories[]->}`;
+export const qRecentArticles = `*[_type == "article" && status == "published"] | order(publishedAt desc)[0...20]{..., author->, categories[]->}`;
+export const qArticleBySlug = `*[_type == "article" && status == "published" && slug.current == $slug][0]{..., author->, categories[]->}`;
+export const qArticlesByCategory = `*[_type == "article" && status == "published" && $slug in categories[]->slug.current] | order(publishedAt desc){..., author->, categories[]->}`;
+export const qAuthorBySlug = `*[_type == "author" && slug.current == $slug][0]{..., "articles": *[_type == "article" && status == "published" && author._ref == ^._id] | order(publishedAt desc){..., categories[]->}}`;
+export const qArticlesByHashtag = `*[_type == "article" && status == "published" && $slug in hashtags] | order(publishedAt desc){..., author->, categories[]->}`;
+export const qAllCategories = `*[_type == "category"]{title, slug}`;
+export const qAllAuthors = `*[_type == "author"]{name, slug}`;
+export const qAllHashtags = `array::unique(*[_type == "article" && status == "published"].hashtags[])`;
+export const qSiteSettings = `*[_type == "siteSettings"][0]`;
