@@ -197,3 +197,37 @@ A boolean field `featured` on the article document type. Articles with `featured
 4. Content volume will be < 50 articles/month at launch (well within free-tier limits)
 5. Readers primarily access the site from Indonesia (mobile-dominant market)
 6. No user-generated content is required at v1
+
+
+## Non-Functional Requirements (Implementation-Critical)
+
+| ID | Requirement | Target |
+|----|-------------|--------|
+| NFR-001 | Publish-to-live latency | <= 5 seconds (p95) |
+| NFR-002 | First meaningful render on 4G mobile | <= 2.5 seconds on homepage |
+| NFR-003 | Content query failure tolerance | Graceful fallback UI, never crash to 500 for recoverable states |
+| NFR-004 | 404 correctness | Unknown article/category/author/hashtag must return proper not-found UI |
+| NFR-005 | Metadata completeness | Every public page returns title + description + canonical |
+| NFR-006 | Cache correctness | No stale critical content after publish/unpublish webhook |
+
+## Tricky Scenarios & Expected Behavior
+
+| Scenario | Why Tricky | Expected Behavior |
+|----------|------------|------------------|
+| Slug rename after publish | Old URL may still be indexed | New slug works; old slug returns 404 (or redirect if implemented intentionally) and related tags revalidated |
+| Article with missing optional SEO | Frequent editorial omission | Fallback to title + excerpt + default OG image |
+| Hashtag casing mismatch (`Malang` vs `malang`) | Free-form input can fragment pages | Normalize slug generation/canonicalization to lowercase; display original label in UI |
+| Category exists but empty | Common at startup | Render valid page with zero-state guidance, not 404 |
+| Webhook duplicate deliveries | Common distributed-system behavior | Revalidation endpoint must be idempotent and still return success |
+| Author removed from published article | Referential drift | Article remains readable with fallback byline text and no runtime crash |
+| Draft accidentally linked | Query/filter mistakes | Only `status == 'published'` appears on public routes |
+
+## Data Contracts (Minimal Stable Shape)
+
+To reduce context load during implementation, the following minimal shapes are mandatory and stable for v1:
+
+- **ArticleCard contract:** `title`, `slug`, `excerpt`, `mainImage?`, `publishedAt`, `author.name?`, `categories[]`
+- **ArticleDetail contract:** ArticleCard fields + `body`, `hashtags[]`, `seo?`, `author.photo?`, `author.slug?`
+- **CategoryPage contract:** `category.title`, `category.slug`, `category.description?`, `articles[]`, `pagination`
+- **AuthorPage contract:** `author.name`, `author.slug`, `author.bio?`, `author.photo?`, `articles[]`
+- **SiteSettings contract:** `siteTitle`, `tagline?`, `logo?`, `defaultOGImage?`, `socialLinks[]`, `footerText?`

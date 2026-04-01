@@ -218,3 +218,72 @@ Tasks are organized into 7 milestones matching the spec milestones. Each milesto
 - M1: T-104 (Sanity init) can run parallel to T-106/T-108/T-109/T-110
 - M2: T-205, T-206, T-207, T-208 (all schema docs) can run in parallel
 - M5: T-501, T-502, T-503 (JSON-LD components) can run in parallel
+
+
+## Agent-Oriented Work Breakdown (Depth Mode)
+
+This section refines milestone tasks into smaller execution packets to minimize context switching.
+
+### M1 Detailed Packets
+
+- **P1-ENV:** bootstrap app + install deps + verify local run
+- **P1-CONFIG:** env templates, next image patterns, base utilities
+- **P1-TYPES:** initial shared interfaces aligned to SPEC data contracts
+
+### M2 Detailed Packets
+
+- **P2-SCHEMA-OBJECTS:** `seo`, `imageWithAlt`
+- **P2-SCHEMA-DOCS-A:** `author`, `category`
+- **P2-SCHEMA-DOCS-B:** `article`, `siteSettings`
+- **P2-STUDIO:** schema registration, studio route, singleton guardrails
+- **P2-QUERIES:** all GROQ queries + typed projections
+
+### M3 Detailed Packets
+
+- **P3-LAYOUT:** container/header/footer + site layout
+- **P3-HOME:** featured + recent with empty/fallback states
+- **P3-DETAIL:** article detail + not-found behavior
+- **P3-LISTING:** artikel/category/author/hashtag pages
+- **P3-STATIC-PARAMS:** deterministic slug generation and guards
+
+### M4 Detailed Packets
+
+- **P4-API:** secure webhook handler + payload validation
+- **P4-TAGS:** central tag mapping utility
+- **P4-E2E:** publish/unpublish/invalid-secret verification
+
+### M5 Detailed Packets
+
+- **P5-METADATA:** per-route metadata strategy and fallbacks
+- **P5-STRUCTURED-DATA:** JSON-LD components and route integration
+- **P5-CRAWL:** sitemap + robots generation and validation
+
+### M6 Detailed Packets
+
+- **P6-DESIGN-SYSTEM:** tokenized Tailwind theme
+- **P6-RESPONSIVE:** viewport pass for all critical routes
+- **P6-PERF:** image sizes, rendering hot spots, Lighthouse pass
+
+### M7 Detailed Packets
+
+- **P7-DEPLOY:** env + domain + CORS/webhook production setup
+- **P7-SMOKE:** regression checklist on production URLs
+- **P7-CONTENT-BOOTSTRAP:** minimum viable editorial inventory
+
+## Edge-Case Task Addendum (Must Execute)
+
+Add these mandatory tasks to the flow:
+
+- [ ] **T-901** Validate hashtag normalization strategy and prevent duplicate canonical hashtag routes.
+- [ ] **T-902** Add tests/manual verification for slug rename behavior and stale-route handling.
+- [ ] **T-903** Verify webhook idempotency under duplicate delivery.
+- [ ] **T-904** Verify empty-state UX for category/author/hashtag pages with zero articles.
+- [ ] **T-905** Verify fallback metadata behavior when SEO fields are missing.
+- [ ] **T-906** Verify reference-deletion resilience (author/category removed while article remains).
+
+## Context Control Rules for Agents
+
+1. Work only one packet at a time.
+2. Do not open files unrelated to current packet unless blocked.
+3. Summarize completed packet in <= 8 bullets before moving on.
+4. If blocked > 15 minutes, log blocker + fallback path in TASKS notes before proceeding.
