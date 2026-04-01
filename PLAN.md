@@ -477,3 +477,56 @@ export default config
 | SEO layer | Medium | JSON-LD, sitemap, robots, metadata |
 | Styling | Medium | Tailwind responsive, mobile-first |
 | Deployment | Low | Vercel free, git push to deploy |
+
+
+## Execution Model (Low-Context, High-Throughput)
+
+### 1) Vertical Slice Order
+
+Build in this strict order to keep context small and feedback fast:
+
+1. **Data foundation:** schemas, queries, typed contracts
+2. **Read path pages:** homepage -> article detail -> category -> author -> hashtag
+3. **Cache path:** webhook + tag revalidation
+4. **SEO path:** metadata + JSON-LD + sitemap + robots
+5. **Polish path:** responsive and design system
+
+### 2) Per-Task Template (for agents)
+
+Every task execution should follow:
+
+- **Inputs:** exact files, env vars, query names
+- **Change:** one bounded behavior change
+- **Checks:** at least one route-level verification and one negative-path check
+- **Outputs:** modified files + notes for next task
+
+### 3) Cache Tag Matrix
+
+| Content Event | Tags to Revalidate |
+|---------------|--------------------|
+| Article publish/update | `homepage`, `articles`, `article:{slug}`, `category:{slug*}`, `author:{slug?}`, `hashtag:{slug*}` |
+| Article unpublish | same as publish + ensure detail route 404 |
+| Category update | `category:{slug}`, `homepage` (if category chips shown), `articles` |
+| Author update | `author:{slug}`, related article tags if byline shown in static cards |
+| Site settings update | `homepage`, `articles`, any page consuming global header/footer metadata |
+
+> `*` means one or many derived from payload/query lookup.
+
+### 4) Failure Budget & Fallbacks
+
+- Query failure: render structured empty/error state with retry-friendly logs; avoid unhandled runtime errors.
+- Missing optional media: preserve layout and semantic content, skip image block.
+- Partial author/category references: render page and degrade metadata gracefully.
+
+### 5) Environment Variable Contract
+
+Required at runtime:
+
+- `NEXT_PUBLIC_SANITY_PROJECT_ID`
+- `NEXT_PUBLIC_SANITY_DATASET`
+- `NEXT_PUBLIC_SANITY_API_VERSION`
+- `SANITY_API_READ_TOKEN` (if needed for non-public reads)
+- `SANITY_REVALIDATE_SECRET`
+- `NEXT_PUBLIC_SITE_URL`
+
+Any missing required variable should fail fast in development with descriptive error messaging.

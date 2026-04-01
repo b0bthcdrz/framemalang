@@ -123,3 +123,47 @@ Architecture Decision Records (ADRs) document specific technical choices. ADRs m
 |------|------|------|
 | Project Owner | Bob | 2025-03-31 |
 | Tech Architect | Bob | 2025-03-31 |
+
+
+---
+
+## Delivery Discipline (Spec-Kit Execution Rules)
+
+To keep implementation fast and predictable for human and AI contributors, all execution must follow these rules:
+
+1. **Single source of truth order:** `CONSTITUTION -> SPEC -> PLAN -> TASKS -> CHECKLIST`
+2. **No hidden requirements:** Any implementation detail not represented in spec-kit docs must be added to docs before coding starts.
+3. **Thin-context tasking:** Every task must be executable with no more than one screen of context and explicit in/out conditions.
+4. **Decision traceability:** Any non-trivial technical change requires an ADR note or ADR amendment.
+5. **Route and taxonomy invariants:** Indonesian route prefixes and three-category model are release invariants unless constitution is amended.
+6. **Failure-first thinking:** Edge cases and rollback conditions must be listed before implementation for each milestone.
+
+### Agent Handoff Standard
+
+Every handoff (human -> agent or agent -> agent) should include:
+
+- Target milestone and task IDs
+- Input contracts (data shape, env vars, route params)
+- Output contracts (page behavior, cache tag behavior, metadata behavior)
+- Explicit non-goals to avoid scope creep
+- Known tricky areas and fallback behavior
+
+If any of these are missing, the task is **not ready** and should be sent back for clarification.
+
+### Definition of Ready (DoR)
+
+A task can begin only when:
+
+- The referenced requirement IDs exist in SPEC.md
+- PLAN.md defines architecture touchpoints
+- TASKS.md includes acceptance checks and dependency order
+- Edge cases are documented
+
+### Definition of Done (DoD)
+
+A task is done only when:
+
+- Feature behavior matches acceptance criteria
+- Relevant cache tags, metadata, and 404 states are verified
+- Checklist entries are updated
+- Documentation is updated for any changed contract
