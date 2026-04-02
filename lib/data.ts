@@ -47,7 +47,7 @@ const fallbackSettings: SiteSettings = {
   footerText: `© ${new Date().getFullYear()} Frame Malang`
 };
 
-async function safeFetch<T>(query: string, params?: Record<string, string>, fallback?: T): Promise<T> {
+async function safeFetch<T>(query: string, params: Record<string, string> = {}, fallback?: T): Promise<T> {
   try {
     return await sanityClient.fetch<T>(query, params, { next: { revalidate: 60 } });
   } catch {
