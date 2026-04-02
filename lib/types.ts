@@ -1,3 +1,5 @@
+import type { TypedObject } from '@portabletext/types';
+
 export type Slug = { current: string };
 
 export type ImageWithAlt = {
@@ -36,7 +38,7 @@ export type Article = {
   status: 'draft' | 'published' | 'archived';
   excerpt: string;
   mainImage?: ImageWithAlt;
-  body?: unknown[];
+  body?: TypedObject[];
   hashtags?: string[];
   featured?: boolean;
   author?: Author;
